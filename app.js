@@ -3,27 +3,31 @@
 
 let cantidadNombres = 5; 
 const nombres =[];
-const nombresSorteados = new set(); //esta linea evitara que se repita los nombres en el sorteo
+const nombresSorteados = new set();
 
 document.getElementById("cantidad-nombres-text").textContent = cantidadNombres;
 
-function agregarNombre() {
+function agregarAmigo() {
     if (nombres.length >= cantidadNombres) {
-        alert("Ha ingresado el maximo de nombres permitidos");
-        return;
+       const input = document.getElementById("amigo");
+       const nombre = input.ariaValueMax.trim();
+       
+       let nombres = prompt(`Ingrese un nombre ${nombres.length + 1}/${cantidadNombres}:`);
+       if (!nombres || nombre.trim()==="") {
+           alert("Por favor, Ingrese un nombre valido.");
+           return;
+       }  
     }
-    let nombre = prompt(`Ingrese un nombre ${nombres.length + 1}/${cantidadNombres}:`);
-    if (!nombre || nombre.trim()==="") {
-        alert("Por favor, Ingrese un nombre valido.");
-        return;
-    }
+    document.getElementById("miBoton").onclick = agregarAmigo;
+
     if (nombres.includes(nombre)) {
         alert("Este nombre ya ha sido incresado. Intente con otro");
         return;
     }
 
     nombres.push(nombre);
-    actualizaListaNombres();
+    input.value = ""; //limpiar el input
+    actualizarListaNombres();
 
 }
 function modificarNombre(){
@@ -47,6 +51,8 @@ function modificarNombre(){
     nombre[index] = nuevoNombre;
     actualizarListaNombres();
 }
+document.getElementById("modificarBoton").onclick = modificarNombre;
+
 function sortearNombres() {
     if (nombresSorteados.size === nombres.length) {
         alert("Todos los nombres ya fueron sorteados. Reinicie el juego.");
@@ -65,6 +71,8 @@ function reinicarSorteo() {
     document.getElementById("nombres-sorteado").textContent = "";
     alert("El sorteo ha sido reinicado.");
 }
+document.getElementById("reiniciarBoton").onclick = reiniciarSorteo;
+
 function actualizarListaNombres() {
     document.getElementById("lista-nombres").textContent = nombres.join(", ");
 }
