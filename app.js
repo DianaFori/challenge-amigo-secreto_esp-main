@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnSortear = document.getElementById("btnSortear");
     const btnReiniciar = document.getElementById("btnReiniciar");
 
+// Expresión regular para validar solo letras y espacios
+
+   
     // Función para actualizar la lista en pantalla
     function actualizarListaNombres() {
         listaAmigos.innerHTML = ""; // Limpiar la lista antes de actualizar
@@ -28,13 +31,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // Habilitar botón de sorteo cuando hay 5 nombres
         btnSortear.disabled = nombres.length !== cantidadNombres;
     }
+    const regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
 
-    // Función para agregar un nombre
     function agregarAmigo() {
         const nombre = input.value.trim();
 
         if (!nombre) {
             alert("Por favor, ingrese un nombre válido.");
+            return;
+        }
+
+        if (!regexNombre.test(nombre)) {
+            alert("Solo se permiten letras y espacios. No se aceptan números ni caracteres especiales.");
+            input.value = ""; // Limpiar el input
             return;
         }
 
@@ -96,21 +105,26 @@ document.addEventListener("DOMContentLoaded", function () {
         btnReiniciar.disabled = false;
     }
 
-    // Función para reiniciar el sorteo sin perder los nombres
     function reiniciarSorteo() {
-        nombresSorteados.clear();
-        resultado.textContent = "";
-        btnReiniciar.disabled = true;
-        alert("El sorteo ha sido reiniciado. Puedes sortear de nuevo.");
+        nombres = [];  // Vacía la lista de nombres
+        nombresSorteados.clear();  // Borra los nombres sorteados
+    
+        listaAmigos.innerHTML = "";  // Borra los nombres de la pantalla
+        resultado.textContent = "";  // Limpia el mensaje de resultado
+    
+        btnSortear.disabled = true;  // Deshabilita el botón "Sortear Amigo"
+        btnReiniciar.disabled = true;  // Deshabilita el botón "Reiniciar Sorteo"
+    
+        alert("El juego ha sido reiniciado. Puedes ingresar nuevos nombres.");
     }
 
-    // ✅ Event Listeners (Detecta clics en los botones)
+    // Event Listeners (Detecta clics en los botones)
     btnAgregar.addEventListener("click", agregarAmigo);
     btnModificar.addEventListener("click", modificarNombre);
     btnSortear.addEventListener("click", sortearAmigo);
     btnReiniciar.addEventListener("click", reiniciarSorteo);
 
-    // ✅ Permitir presionar ENTER en el input para agregar un nombre
+    // Permitir presionar ENTER en el input para agregar un nombre
     input.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             agregarAmigo();
