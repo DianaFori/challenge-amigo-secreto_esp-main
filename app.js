@@ -106,17 +106,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function reiniciarSorteo() {
-        nombres = [];  // Vacía la lista de nombres
-        nombresSorteados.clear();  // Borra los nombres sorteados
-    
-        listaAmigos.innerHTML = "";  // Borra los nombres de la pantalla
-        resultado.textContent = "";  // Limpia el mensaje de resultado
-    
-        btnSortear.disabled = true;  // Deshabilita el botón "Sortear Amigo"
-        btnReiniciar.disabled = true;  // Deshabilita el botón "Reiniciar Sorteo"
-    
-        alert("El juego ha sido reiniciado. Puedes ingresar nuevos nombres.");
-    }
+    nombres = [];  // Vacía la lista de nombres
+    nombresSorteados.clear();  // Borra los nombres sorteados
+
+    listaAmigos.innerHTML = "";  // Borra los nombres de la pantalla
+    resultado.textContent = "";  // Limpia el mensaje de resultado
+
+    btnSortear.disabled = true;  // Deshabilita el botón "Sortear Amigo"
+    btnReiniciar.disabled = true;  // Deshabilita el botón "Reiniciar Sorteo"
+
+    alert("El juego ha sido reiniciado. Puedes ingresar nuevos nombres.");
+}
 
     // Event Listeners (Detecta clics en los botones)
     btnAgregar.addEventListener("click", agregarAmigo);
