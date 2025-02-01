@@ -22,17 +22,18 @@
             <p>Cantidad máxima de nombres: <span id="cantidad-nombres-text">5</span></p>
             <div class="input-wrapper">
                 <input type="text" id="amigo" class="input-name" placeholder="Escribe un nombre">
-                <button class="button-add" onclick="agregarAmigo()">Añadir</button> 
-                <button class="button-edit" onclick="modificarNombre()">Modificar Nombre</button>
-                <button onclick="reiniciarSorteo()">Reiniciar Sorteo</button>
+                <button id="btnAgregar" class="button-add">Añadir</button>
+                <button id="btnModificar" class="button-edit">Modificar Nombre</button>
+                <button id="btnReiniciar" disabled>Reiniciar Sorteo</button>
 
             </div>
            
             <ul id="listaAmigos" class="name-list"></ul>
-            <ul id="resultado" class="result-list" aria-live="polite"></ul>
+            <ul id="resultado" class="result-list" ></ul>
+            <p id="resultado" class="result-list"></p>
 
             <div class="button-container">
-                <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto"> 
+                <button id="btnSortear" class="button-draw" disabled>Sortear amigo</button>
                     <img src="assets/play_circle_outline.png" alt="Ícono para sortear">
                     Sortear amigo
                 </button>
