@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnSortear = document.getElementById("btnSortear");
     const btnReiniciar = document.getElementById("btnReiniciar");
 
+// Expresión regular para validar solo letras y espacios
+
+   
     // Función para actualizar la lista en pantalla
     function actualizarListaNombres() {
         listaAmigos.innerHTML = ""; // Limpiar la lista antes de actualizar
@@ -28,13 +31,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // Habilitar botón de sorteo cuando hay 5 nombres
         btnSortear.disabled = nombres.length !== cantidadNombres;
     }
+    const regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
 
-    // Función para agregar un nombre
     function agregarAmigo() {
         const nombre = input.value.trim();
 
         if (!nombre) {
             alert("Por favor, ingrese un nombre válido.");
+            return;
+        }
+
+        if (!regexNombre.test(nombre)) {
+            alert("Solo se permiten letras y espacios. No se aceptan números ni caracteres especiales.");
+            input.value = ""; // Limpiar el input
             return;
         }
 
