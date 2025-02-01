@@ -3,74 +3,84 @@
 
 let cantidadNombres = 5; 
 const nombres =[];
-const nombresSorteados = new set();
+const nombresSorteados = new Set();
 
-document.getElementById("cantidad-nombres-text").textContent = cantidadNombres;
+ cantidadNombres;document.getElementById("cantidad-nombres-text")?.textContent =
 
-function agregarAmigo() {
-    if (nombres.length >= cantidadNombres) {
-       const input = document.getElementById("amigo");
-       const nombre = input.ariaValueMax.trim();
+function agregarAmigo(){
+
+    const input = document.getElementById("amigo");
+       const nombre = input.Value.trim();
+     if (!nombre) {
+        alert ("Por  favor, ingrese un nombre válido.");
+        return;
+     }  
        
-       let nombres = prompt(`Ingrese un nombre ${nombres.length + 1}/${cantidadNombres}:`);
-       if (!nombres || nombre.trim()==="") {
-           alert("Por favor, Ingrese un nombre valido.");
-           return;
-       }  
-    }
-    document.getElementById("miBoton").onclick = agregarAmigo;
 
     if (nombres.includes(nombre)) {
         alert("Este nombre ya ha sido incresado. Intente con otro");
+        return;
+    }
+    if (nombres.length >= cantidadNombres) {
+        alert("Has alcanzado el máximo de nombres permitidos.");
         return;
     }
 
     nombres.push(nombre);
     input.value = ""; //limpiar el input
     actualizarListaNombres();
-
+    
 }
-function modificarNombre(){
-    if (nombres.length ===0) {
-        alert("No hay nombres ingresados para modificar.");
-        return;
+document.getElementById("amigo").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        agregarAmigo();
     }
+});    
 
-    let nombreActual = prompt("Ingrese el nombre que sea modificar:");
-    if (!nombres.includes(nombreActual)) {
-        alert("El nombre no esta en la lista.");
-        return;
-    }
+function actualizarListaNombres(){
+    const lista = document.getElementById("listaAmigos");
+    lista.innerHTML = ""
+
+    nombre.forEach((nombre) => {
+        const li = document.createElement("li");
+        li.textContent = nombre;
+        lista.appendChild(li) 
+    });
+    
+}
     let nuevoNombre = prompt("Ingrese el nombre:");
     if (!nuevoNombre || nuevoNombre.trim() === "" || nombres.includes(nuevoNombre)) {
         alert("El nuevo nombre no es validos o ya existe.");
         return;
 
     }
-    let index = nombre.indexOf(nombreActual);
-    nombre[index] = nuevoNombre;
+    let index = nombres.indexOf(nombreActual);
+    nombres[index] = nuevoNombre;
     actualizarListaNombres();
-}
+
 document.getElementById("modificarBoton").onclick = modificarNombre;
 
-function sortearNombres() {
+function sortearAmigos() {
     if (nombresSorteados.size === nombres.length) {
         alert("Todos los nombres ya fueron sorteados. Reinicie el juego.");
         return;
     }
+
     let nombreAleatorio;
     do{
         nombreAleatorio = nombres[Math.floor(Math.random() * nombres.length)];
-    } while (nombresSorteados.has(nombresAleatorios));
+    } while (nombresSorteados.has(nombreAleatorio));
 
-    nombresSorteados.add(nombrealeatorio);
+    nombresSorteados.add(nombreAleatorio);
+    
     document.getElementById("nombre-sorteados").textContent = nombreAleatorio;
 }
-function reinicarSorteo() {
+function reiniciarSorteo() { 
     nombresSorteados.clear();
-    document.getElementById("nombres-sorteado").textContent = "";
-    alert("El sorteo ha sido reinicado.");
+    document.getElementById("nombre-sorteado").textContent = ""; 
+    alert("El sorteo ha sido reiniciado.");
 }
+
 document.getElementById("reiniciarBoton").onclick = reiniciarSorteo;
 
 function actualizarListaNombres() {
