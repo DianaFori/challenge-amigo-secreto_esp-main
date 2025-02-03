@@ -10,17 +10,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const listaAmigos = document.getElementById("listaAmigos");
     const resultado = document.getElementById("resultado");
 
-    const btnAgregar = document.getElementById("btnAgregar");
-    const btnModificar = document.getElementById("btnModificar");
-    const btnSortear = document.getElementById("btnSortear");
-    const btnReiniciar = document.getElementById("btnReiniciar");
+    const botonAgregar = document.getElementById("botonAgregar");
+    const botonModificar = document.getElementById("botonModificar");
+    const botonSortear = document.getElementById("botonSortear");
+    const botonReiniciar = document.getElementById("botonReiniciar");
 
-// Expresión regular para validar solo letras y espacios
+// Para validar que el usuario solo ingrese nombres alfabeticos
 
    
     // Función para actualizar la lista en pantalla
     function actualizarListaNombres() {
-        listaAmigos.innerHTML = ""; // Limpiar la lista antes de actualizar
+        listaAmigos.innerHTML = ""; // limpiar y actualizar lista
 
         nombres.forEach((nombre) => {
             const li = document.createElement("li");
@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
             listaAmigos.appendChild(li);
         });
 
-        // Habilitar botón de sorteo cuando hay 5 nombres
-        btnSortear.disabled = nombres.length !== cantidadNombres;
+        // Habilitar botón de sorteo cuando haya ingresado el maximo de nombres
+        botonSortear.disabled = nombres.length !== cantidadNombres;
     }
     const regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
 
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!regexNombre.test(nombre)) {
             alert("Solo se permiten letras y espacios. No se aceptan números ni caracteres especiales.");
-            input.value = ""; // Limpiar el input
+            input.value = ""; 
             return;
         }
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         nombres.push(nombre);
-        input.value = ""; // Limpiar el input
+        input.value = ""; 
         actualizarListaNombres();
     }
 
@@ -102,29 +102,29 @@ document.addEventListener("DOMContentLoaded", function () {
         resultado.textContent = `🎉 Tu amigo secreto es: ${nombreAleatorio} 🎉`;
 
         // Habilitar botón de reiniciar
-        btnReiniciar.disabled = false;
+        botonReiniciar.disabled = false;
     }
-
+// funcion para limpiar y borrar los datos ingresados una vez se reinicie el juego
     function reiniciarSorteo() {
-    nombres = [];  // Vacía la lista de nombres
-    nombresSorteados.clear();  // Borra los nombres sorteados
+    nombres = [];  
+    nombresSorteados.clear();
 
-    listaAmigos.innerHTML = "";  // Borra los nombres de la pantalla
-    resultado.textContent = "";  // Limpia el mensaje de resultado
-
-    btnSortear.disabled = true;  // Deshabilita el botón "Sortear Amigo"
-    btnReiniciar.disabled = true;  // Deshabilita el botón "Reiniciar Sorteo"
+    listaAmigos.innerHTML = "";  
+    resultado.textContent = "";  
+//Deshabilitar el botón sortear amigo y reiniciar juego hasta el que usuario haya ingresado todos los nombres
+    botonSortear.disabled = true;  
+    botonReiniciar.disabled = true;  
 
     alert("El juego ha sido reiniciado. Puedes ingresar nuevos nombres.");
 }
 
-    // Event Listeners (Detecta clics en los botones)
-    btnAgregar.addEventListener("click", agregarAmigo);
-    btnModificar.addEventListener("click", modificarNombre);
-    btnSortear.addEventListener("click", sortearAmigo);
-    btnReiniciar.addEventListener("click", reiniciarSorteo);
+    //detecta la utilizada o acción de los botones
+    botonAgregar.addEventListener("click", agregarAmigo);
+    botonModificar.addEventListener("click", modificarNombre);
+    botonSortear.addEventListener("click", sortearAmigo);
+    botonReiniciar.addEventListener("click", reiniciarSorteo);
 
-    // Permitir presionar ENTER en el input para agregar un nombre
+    // Agregar y guardar dato ingredado al presionar Enter.
     input.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             agregarAmigo();
